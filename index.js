@@ -24,7 +24,7 @@ const __dirname = dirname(__filename);
 app.use(
   cors({
     origin: [
-      "https://prepmate-ai-nine.vercel.app/", // 🔁 Replace with your actual frontend Vercel URL
+      "https://prepmate-ai-nine.vercel.app", // 🔁 Replace with your actual frontend Vercel URL
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
