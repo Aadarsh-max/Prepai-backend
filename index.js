@@ -9,7 +9,7 @@ import authRoutes from "./routes/authRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
 import questionRoutes from './routes/questionRoutes.js'
 import { generateInterviewQuestions } from "./controllers/aiController.js";
-import {generateConceptExplanation} from "./controllers/aiController.js"
+import { generateConceptExplanation } from "./controllers/aiController.js";
 import { protect } from "./middlewares/authMiddleware.js";
 
 const app = express();
@@ -20,19 +20,22 @@ connectDB();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-//Cors
+// ✅ CORS Setup
 app.use(
   cors({
-    origin: "*",
+    origin: [
+      "https://prepmate-ai-nine.vercel.app/", // 🔁 Replace with your actual frontend Vercel URL
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // Optional: allow cookies if you're using them
   })
 );
 
-//Routes
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/sessions", sessionRoutes);
-app.use('/api/questions' , questionRoutes);
+app.use('/api/questions', questionRoutes);
 app.use("/api/ai/generate-questions", protect, generateInterviewQuestions);
 app.use("/api/ai/generate-explanation", protect, generateConceptExplanation);
 
